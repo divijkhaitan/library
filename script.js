@@ -30,7 +30,7 @@ const heroes=new book ("House of Hades", "Rick Riordan", 455, false)
 const dragonball=new book("Dragon Ball Volume 1", "Akira Toriyama", 212, true)
 
 let catalog=[percy1, clues39, artemis, tweak, alex, heroes, dragonball]
-
+let divcat=[];
 function populateSite(){
     let currentcard;
     let nodes;
@@ -65,8 +65,8 @@ function addbook(newbook)
     let currentButtons;
         currentcard=document.createElement('div')//currentcard=document.querySelector(`[data='${i}']`)
         currentcard.classList.add('cards')
-        currentcard.setAttribute('data',`${catalog.length+1}`)
-        
+        currentcard.setAttribute('data',`${divcat.length}`)
+
         currentTitle=document.createElement('div')//currentcard=document.querySelector(`[data='${i}']`)
         currentTitle.classList.add('title')
         currentTitle.textContent=`Name: ${newbook.title}`
@@ -83,11 +83,38 @@ function addbook(newbook)
         currentStatus.classList.add('status')
         currentStatus.textContent=`Availability: ${newbook.availability()}`
         
+        currentButtons=document.createElement('div')
+        currentButtons.classList.add('buttonbar')
+        remove=document.createElement('button')
+        remove.classList.add('button')
+        remove.addEventListener('click', clicked)
+        remove.textContent="Remove"
+        currentButtons.appendChild(remove)
+        
 
         currentcard.appendChild(currentTitle)
         currentcard.appendChild(currentAuth)
         currentcard.appendChild(currentPages)
         currentcard.appendChild(currentStatus)
-        
+        currentcard.appendChild(currentButtons)
+
         container.appendChild(currentcard)
+        divcat.push(currentcard)
+}
+
+function clicked(e)
+{
+    let currentcard=e.target.parentNode.parentNode;
+    index=parseInt(currentcard.getAttribute('data'))
+    currentcard.remove()
+    divcat.splice(index,1)
+    catalog.splice(index,1)
+    //console.log(index)
+    //console.log(index+1)
+    //console.log(catalog.length)
+    for(let i=index;i<catalog.length;i++)
+    {
+        console.log(divcat[i].getAttribute('data'))
+        divcat[i].setAttribute('data',`${parseInt(divcat[i].getAttribute('data')) - 1}`)
+    }
 }
