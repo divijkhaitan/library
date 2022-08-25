@@ -1,3 +1,4 @@
+let container=document.querySelector('.gridcontainer');
 function book(title, author, pages, status){
     this.title=title
     this.author=author
@@ -43,4 +44,50 @@ function populateSite(){
         nodes[3].textContent=`Availability: ${catalog[i].availability()}`
     }
 }
-populateSite()
+//populateSite()
+
+function populateSiten(){
+    for (let i=0; i<catalog.length; i++)
+    {
+        addbook(catalog[i])
+    }
+}
+populateSiten()
+
+
+function addbook(newbook)
+{
+    let currentcard;
+    let currentTitle;
+    let currentAuth;
+    let currentPages;
+    let currentStatus;
+    let currentButtons;
+        currentcard=document.createElement('div')//currentcard=document.querySelector(`[data='${i}']`)
+        currentcard.classList.add('cards')
+        currentcard.setAttribute('data',`${catalog.length+1}`)
+        
+        currentTitle=document.createElement('div')//currentcard=document.querySelector(`[data='${i}']`)
+        currentTitle.classList.add('title')
+        currentTitle.textContent=`Name: ${newbook.title}`
+        
+        currentAuth=document.createElement('div')
+        currentAuth.classList.add('author')
+        currentAuth.textContent=`Author: ${newbook.author}`
+        
+        currentPages=document.createElement('div')
+        currentPages.classList.add('pages')
+        currentPages.textContent=`Pages: ${newbook.pages}`
+        
+        currentStatus=document.createElement('div')
+        currentStatus.classList.add('status')
+        currentStatus.textContent=`Availability: ${newbook.availability()}`
+        
+
+        currentcard.appendChild(currentTitle)
+        currentcard.appendChild(currentAuth)
+        currentcard.appendChild(currentPages)
+        currentcard.appendChild(currentStatus)
+        
+        container.appendChild(currentcard)
+}
