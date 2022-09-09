@@ -1,43 +1,85 @@
 let container=document.querySelector('.gridcontainer');
-function book(title, author, pages, status, read){
-    this.title=title
-    this.author=author
-    this.pages=pages
-    this.status=status
-    this.read=read
-}
-book.prototype.availability=function()
-{
-    if (this.status)
-    {
-        return "Available"
-    }
-    else
-    {
-        return "Unavailable"
-    }
-}
 
-book.prototype.haveRead=function()
+class book
 {
-    if(this.read)
+    constructor(title, author, pages, status, read)
     {
-        return "Completed"
+        this.title=title
+        this.author=author
+        this.pages=pages
+        this.status=status
+        this.read=read
     }
-    else
+    availability()
     {
-        return "Unread"
+        if (this.status)
+        {
+            return "Available"
+        }
+        else
+        {
+            return "Unavailable"
+        }
+    }
+    haveRead()
+    {
+        if(this.read)
+        {
+            return "Completed"
+        }
+        else
+        {
+            return "Unread"
+        }
+    }
+    toggleRead()
+    {
+        this.read= !(this.read)
+    }
+    info()
+    {
+        console.log(`Name: ${this.title}\nAuthor: ${this.author}\nPages: ${this.pages}\nAvailability: ${this.availability}`)
     }
 }
-book.prototype.toggleRead=function()
-{
-    this.read= !(this.read)
-}
+// function book(title, author, pages, status, read){
+//     this.title=title
+//     this.author=author
+//     this.pages=pages
+//     this.status=status
+//     this.read=read
+// }
+// book.prototype.availability=function()
+// {
+//     if (this.status)
+//     {
+//         return "Available"
+//     }
+//     else
+//     {
+//         return "Unavailable"
+//     }
+// }
+
+// book.prototype.haveRead=function()
+// {
+//     if(this.read)
+//     {
+//         return "Completed"
+//     }
+//     else
+//     {
+//         return "Unread"
+//     }
+// }
+// book.prototype.toggleRead=function()
+// {
+//     this.read= !(this.read)
+// }
 
 
-book.prototype.info= function(){
-    console.log(`Name: ${this.title}\nAuthor: ${this.author}\nPages: ${this.pages}\nAvailability: ${this.availability}`)
-}
+// book.prototype.info= function(){
+//     console.log(`Name: ${this.title}\nAuthor: ${this.author}\nPages: ${this.pages}\nAvailability: ${this.availability}`)
+// }
 
 const percy1=new book("Lightning Thief", "Rick Riordan", 254, true, true)
 const clues39=new book ("One False Note", "Gordan Korman",198, false, true)
@@ -51,13 +93,13 @@ let initcatalog=[percy1, clues39, artemis, tweak, alex, heroes, dragonball]
 let divcat=[];
 let catalog=[]
 
-function populateSiten(){
+function populateSite(){
     for (let i=0; i<initcatalog.length; i++)
     {
         addbook(initcatalog[i])
     }
 }
-populateSiten()
+populateSite()
 
 
 function addbook(newbook)
